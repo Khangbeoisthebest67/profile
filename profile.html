@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khang Nguyên</title>
+<style>
+:root{--bg:#07080b;--card:#0e1015;--line:#1c1f28;--tx:#e8eaf0;--mut:#8a90a0;--acc:#5b8cff;--on:#23a55a;--idle:#f0b232;--dnd:#f23f43;--off:#80848e}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;background:radial-gradient(ellipse at top,#10131c,var(--bg) 60%);color:var(--tx);font:15px/1.6 "Segoe UI",system-ui,sans-serif;display:grid;place-items:center;padding:24px}
+.card{width:min(960px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.banner{height:150px;background:linear-gradient(120deg,#1a2240,#0e1015 60%),#111;background-size:cover;background-position:center;position:relative}
+.pill{position:absolute;top:14px;right:16px;display:flex;gap:8px;align-items:center;background:#000a;border:1px solid var(--line);border-radius:99px;padding:4px 12px;font:12px ui-monospace,Consolas,monospace}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--off);display:inline-block}
+.dot.online{background:var(--on)}.dot.idle{background:var(--idle)}.dot.dnd{background:var(--dnd)}
+.head{display:flex;gap:18px;padding:0 28px;margin-top:-48px;align-items:flex-end;flex-wrap:wrap}
+.av{width:104px;height:104px;border-radius:50%;border:4px solid var(--card);background:#222 center/cover;position:relative;flex:none}
+.av .dot{position:absolute;right:4px;bottom:4px;width:20px;height:20px;border:4px solid var(--card)}
+h1{font-size:34px;line-height:1.1}
+.sub{color:var(--mut);margin-top:4px}
+.sub b{color:var(--tx);font-weight:600}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:18px 28px 0}
+.chip{border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13px;background:#12151c}
+.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;padding:22px 28px 28px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+h2{font:12px ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--mut);margin-bottom:10px;font-weight:500}
+.box{border:1px solid var(--line);background:#12151c;border-radius:14px;padding:14px 16px}
+.box+h2,.col>*+h2{margin-top:20px}
+.hob{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hob .box strong{display:block;font-size:14px}.hob small{color:var(--mut);font:11px ui-monospace,Consolas,monospace}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.links a{display:flex;gap:8px;justify-content:center;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:#12151c;color:var(--tx);text-decoration:none;font-weight:600;transition:border-color .2s,background .2s}
+.links a:hover,.links a:focus-visible{border-color:var(--acc);background:#161b27;outline:0}
+.links svg{width:20px;height:20px;fill:currentColor}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:13px}
+.rows span{color:var(--mut);font-family:ui-monospace,Consolas,monospace}
+.rows b{text-align:right;font-weight:600}
+.foot{display:flex;justify-content:space-between;padding:14px 28px;border-top:1px solid var(--line);color:var(--mut);font:12px ui-monospace,Consolas,monospace}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="banner" id="banner"><div class="pill"><span class="dot" id="d1"></span><span id="st">DISCORD · ...</span></div></div>
+  <div class="head">
+    <div class="av" id="av"><span class="dot" id="d2"></span></div>
+    <div>
+      <h1 id="name"></h1>
+      <p class="sub"><b id="user"></b> · <span id="role"></span></p>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="grid">
+    <div class="col">
+      <h2>GIỚI THIỆU</h2>
+      <div class="box" id="bio"></div>
+      <h2>TRẠNG THÁI DISCORD</h2>
+      <div class="box"><small style="color:var(--mut)" id="act1">Đang tải…</small><div id="act2" style="font-weight:600"></div></div>
+      <h2>SỞ THÍCH</h2>
+      <div class="hob" id="hob"></div>
+    </div>
+    <div class="col">
+      <h2>THÔNG TIN</h2>
+      <div class="box">
+        <div class="rows" id="rows"></div>
+      </div>
+      <h2>LIÊN KẾT</h2>
+      <div class="links">
+        <a id="dl" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 4.4A17 17 0 0 0 15.800 3l-.5 1a15.500 15.500 0 0 0-4.600 0l-.5-1A17 17 0 0 0 4 4.400C1.300 8.400.6 12.300 1 16.100A17 17 0 0 0 6.100 18.700l1-1.600a11 11 0 0 1-1.700-.8l.4-.3a12 12 0 0 0 10.400 0l.4.300a11 11 0 0 1-1.700.8l1 1.600A17 17 0 0 0 23 16.100c.5-4.400-.8-8.300-3-11.700zM8.700 13.800c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm6.600 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg>Discord</a>
+        <a id="gh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5a11.500 11.500 0 0 0-3.600 22.400c.6.1.8-.3.8-.6v-2c-3.200.7-3.900-1.400-3.900-1.400-.5-1.300-1.300-1.700-1.300-1.700-1-.7.1-.7.1-.7 1.200.1 1.800 1.200 1.800 1.200 1 1.800 2.700 1.300 3.400 1 .1-.8.400-1.300.7-1.600-2.600-.3-5.300-1.300-5.300-5.700 0-1.300.5-2.300 1.200-3.100-.1-.3-.5-1.500.1-3.100 0 0 1-.3 3.200 1.200a11 11 0 0 1 5.800 0c2.200-1.500 3.200-1.200 3.200-1.200.6 1.600.2 2.800.1 3.100.7.800 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.400.8 1.100.8 2.200v3.200c0 .3.200.7.800.6A11.500 11.500 0 0 0 12 .5z"/></svg>GitHub</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span id="clock"></span><span>KHANG NGUYÊN · PROFILE</span></div>
+</main>
+
+<script>
+/* ====== SỬA Ở ĐÂY ====== */
+const CONFIG = {
+  discordId: "THAY_ID_DISCORD_CUA_BAN",          // User ID Discord (bật Developer Mode > chuột phải > Copy User ID)
+  github: "https://github.com/THAY_USERNAME",    // link GitHub của bạn
+  discordLink: "https://discord.com/users/THAY_ID_DISCORD_CUA_BAN",
+  name: "Khang Nguyên",
+  username: "@khang",
+  role: "Lập trình viên · Script Roblox · Web",
+  banner: "",                                     // link ảnh banner (Discord API không cấp banner qua Lanyard)
+  location: "Việt Nam",
+  tags: ["Roblox", "Lua", "Web", "osu!"],
+  bio: "Xin chào! Mình là Khang. Mình thích code script Roblox, làm web và chơi osu! những lúc rảnh.",
+  hobbies: [["Code script Roblox","Lua · Game Scripts"],["Làm web","HTML · CSS · JS"],["osu!","Rhythm game · Aim"],["Code","Tools · Dự án nhỏ"]],
+  info: [["Ngôn ngữ","Lua · JavaScript · HTML/CSS"],["Lĩnh vực","Script Roblox · Web"],["Giải trí","osu!"]]
+};
+/* ======================== */
+const $ = id => document.getElementById(id);
+$("name").textContent = CONFIG.name; $("user").textContent = CONFIG.username; $("role").textContent = CONFIG.role;
+$("bio").textContent = CONFIG.bio; $("gh").href = CONFIG.github; $("dl").href = CONFIG.discordLink;
+if (CONFIG.banner) $("banner").style.backgroundImage = "url('" + CONFIG.banner + "')";
+$("chips").innerHTML = ["📍 " + CONFIG.location].concat(CONFIG.tags).map(t => '<span class="chip"></span>').join("");
+[...$("chips").children].forEach((c, i) => c.textContent = ["📍 " + CONFIG.location].concat(CONFIG.tags)[i]);
+CONFIG.hobbies.forEach(h => { const d = document.createElement("div"); d.className = "box"; const s = document.createElement("strong"); s.textContent = h[0]; const m = document.createElement("small"); m.textContent = h[1]; d.append(s, m); $("hob").append(d); });
+CONFIG.info.forEach(r => { const d = document.createElement("div"); const a = document.createElement("span"); a.textContent = r[0]; const b = document.createElement("b"); b.textContent = r[1]; d.append(a, b); $("rows").append(d); });
+
+const LABEL = { online: "ONLINE", idle: "VẮNG MẶT", dnd: "ĐỪNG LÀM PHIỀN", offline: "OFFLINE" };
+function setStatus(s) {
+  s = s || "offline";
+  ["d1", "d2"].forEach(i => $(i).className = "dot " + s);
+  $("st").textContent = "DISCORD · " + LABEL[s];
+}
+async function sync() {
+  try {
+    const r = await fetch("https://api.lanyard.rest/v1/users/" + CONFIG.discordId);
+    const j = await r.json();
+    if (!j.success) throw 0;
+    const d = j.data, u = d.discord_user;
+    setStatus(d.discord_status);
+    if (u.avatar) $("av").style.backgroundImage = "url(https://cdn.discordapp.com/avatars/" + u.id + "/" + u.avatar + ".png?size=256)";
+    const custom = d.activities.find(a => a.type === 4);
+    const game = d.activities.find(a => a.type !== 4);
+    $("act1").textContent = game ? "ĐANG HOẠT ĐỘNG" : "TRẠNG THÁI HIỆN TẠI";
+    $("act2").textContent = game ? game.name + (game.details ? " · " + game.details : "") : (custom && custom.state) || LABEL[d.discord_status];
+  } catch (e) {
+    setStatus("offline");
+    $("act1").textContent = "CHƯA KẾT NỐI";
+    $("act2").textContent = "Kiểm tra Discord ID và vào server Lanyard";
+  }
+}
+sync(); setInterval(sync, 30000);
+setInterval(() => { $("clock").textContent = new Date().toLocaleTimeString("vi-VN", { hour12: false }) + " (GMT+7)"; }, 1000);
+</script>
+</body>
+</html>
